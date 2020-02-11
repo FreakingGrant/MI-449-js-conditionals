@@ -58,7 +58,7 @@ function sanitizeDecision (decision) {
  */
 function smellWumpus () {
   var distance = yourRoom - wumpus
-  if (distance < 0) {
+  if (distance < 0) { // Absolute value the distance
     distance *= -1
   }
 
