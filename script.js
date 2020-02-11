@@ -52,6 +52,23 @@ function sanitizeDecision (decision) {
   return decision
 }
 
+/**
+ * Determines if we can smell the Wumpus. You can smell the Wumpus up to 2 rooms away
+ * @return true If we can smell the Wumpus
+ */
+function smellWumpus () {
+  var distance = yourRoom - wumpus
+  if (distance < 0) {
+    distance *= -1
+  }
+
+  if (distance <= 2) {
+    return true
+  } else {
+    return false
+  }
+}
+
 window.alert('Welcome to the GAME, punk')
 var readyToPlay = window.prompt('Are you ready to play the game?')
 
@@ -70,6 +87,7 @@ if (readyToPlay !== 'yes') {
 window.confirm('You are about to embark on a quest for the Wumpus.')
 window.confirm('The wumpus is hidden in a room from ' + minRoom + ' to ' + maxRoom + '. You have been randomly dropped in a room between ' + minRoom + ' and ' + maxRoom + '.')
 window.confirm('The wumpus moves about randomly. He may be in a room at some time, but then move to another room. You must keep moving to find the Wumpus.')
+window.confirm('You can smell the Wumpus up to two rooms away.')
 window.confirm('Your goal is find the Wumpus. It may be happy, or it may be ferral. You could live, you could die. Only one way to find out.')
 
 if (yourRoom === wumpus && wumpusBehavior < 0.6) {
@@ -86,7 +104,13 @@ console.log('Wumpus room: ' + wumpus)
 console.log('Your room: ' + yourRoom)
 
 while (!gameOver) {
-  var nextRoom = window.prompt('You are in room ' + yourRoom + '. Which room do you want to go to?')
+  var nextRoom
+  if (smellWumpus()) {
+    nextRoom = window.prompt('You are in room ' + yourRoom + '. You can smell the Wumpus! Which room do you want to go to?')
+  }
+  else {
+    nextRoom = window.prompt('You are in room ' + yourRoom + '. Which room do you want to go to?')
+  }
   nextRoom = getRoomInput(nextRoom)
 
   if (nextRoom === wumpus) { // If you move into the room with the Wumpus
