@@ -31,16 +31,9 @@ function getRoomInput (nextRoom) {
  * @return {int} decision The decision the player made. 1 To not kill the Wumpus, 2 to kill the Wumpus, 3 to kill themselves
  */
 function sanitizeDecision (decision) {
-  while (decision === null || decision === '') {
+  while (decision === null || decision === '' || isNaN(parseInt(decision)) || decision < 1 || decision > 3) {
     decision = window.prompt('What will you do? Type:\n1 - To NOT kill the Wumpus.\n2 - Kill the Wumpus.\n3 - Kill yourself.')
-  }
-  while (isNaN(parseInt(decision))) {
-    decision = window.prompt('What will you do? Type:\n1 - To NOT kill the Wumpus.\n2 - Kill the Wumpus.\n3 - Kill yourself.')
-  }
-  while (decision < 1 || decision > 3) {
-    decision = window.prompt('What will you do? Type:\n1 - To NOT kill the Wumpus.\n2 - Kill the Wumpus.\n3 - Kill yourself.')
-  }
-
+    
   decision = decision.trim()
   decision = Math.floor(decision)
   return decision
