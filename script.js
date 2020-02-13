@@ -33,6 +33,7 @@ function getRoomInput (nextRoom) {
 function sanitizeDecision (decision) {
   while (decision === null || decision === '' || isNaN(parseInt(decision)) || decision < 1 || decision > 3) {
     decision = window.prompt('What will you do? Type:\n1 - To NOT kill the Wumpus.\n2 - Kill the Wumpus.\n3 - Kill yourself.')
+  }
     
   decision = decision.trim()
   decision = Math.floor(decision)
