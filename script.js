@@ -16,13 +16,7 @@ var defeatStatement = 'You have found the Wumpus and have been eaten...'
  * @return {int} nextRoom The next room to navigate too.
  */
 function getRoomInput (nextRoom) {
-  while (nextRoom === null || nextRoom === '') {
-    nextRoom = window.prompt('You are in room ' + yourRoom + '. Which room do you want to go to?')
-  }
-  while (isNaN(parseInt(nextRoom))) {
-    nextRoom = window.prompt('You are in room ' + yourRoom + '. Which room do you want to go to?')
-  }
-  while (nextRoom > maxRoom || nextRoom < minRoom) {
+  while (nextRoom === null || nextRoom === '' || isNaN(parseInt(nextRoom)) || nextRoom > maxRoom || nextRoom < minRoom) {
     nextRoom = window.prompt('You are in room ' + yourRoom + '. Which room do you want to go to?')
   }
 
@@ -84,11 +78,18 @@ if (readyToPlay !== 'yes') {
   window.alert("Good, let's begin")
 }
 
-window.confirm('You are about to embark on a quest for the Wumpus.')
-window.confirm('The wumpus is hidden in a room from ' + minRoom + ' to ' + maxRoom + '. You have been randomly dropped in a room between ' + minRoom + ' and ' + maxRoom + '.')
-window.confirm('The wumpus moves about randomly. He may be in a room at some time, but then move to another room. You must keep moving to find the Wumpus.')
-window.confirm('You can smell the Wumpus up to two rooms away.')
-window.confirm('Your goal is find the Wumpus. It may be happy, or it may be ferral. You could live, you could die. Only one way to find out.')
+window.alert('You are about to embark on a quest for the Wumpus.')
+window.alert('The wumpus is hidden in a room from ' + minRoom + ' to ' + maxRoom + '. You have been randomly dropped in a room between ' + minRoom + ' and ' + maxRoom + '.')
+window.alert('The wumpus moves about randomly. He may be in a room at some time, but then move to another room. You must keep moving to find the Wumpus.')
+window.alert('You can smell the Wumpus up to two rooms away.')
+window.alert('Your goal is find the Wumpus. It may be happy, or it may be ferral. You could live, you could die. Only one way to find out.')
+var confirmed = window.confirm('Click confirm if you understand')
+
+if (confirmed) {
+  window.alert('Good, let\'s begin')
+} else {
+  window.alert('Too bad, let\'s begin')
+}
 
 if (yourRoom === wumpus && wumpusBehavior < 0.6) {
   window.alert(victoryStatement)
